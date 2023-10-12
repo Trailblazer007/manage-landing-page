@@ -2,26 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    background-image: url("../public/images/bg-tablet-pattern.svg");
+    background-repeat: no-repeat;
+    background-size: 800px;
+    background-position: 90% -25%;
+}
+
+#cta {
+    background-image: url("../public/images/bg-simplify-section-desktop.svg");
+    background-repeat: no-repeat;
+}
+
+@media(max-width: 576px){
+    body{
+
+        background-position: 50% 20px;
+        background-size: 500px;
+        
+    }
+
+    #cta{
+        background-image: url("../public/images/bg-simplify-section-mobile.svg");
+    }
+}
+
+/* Hamburger menu */
+
+#menu-btn {
+    transition: all 3s ease-in;
+}
+
+.hamburger {
+    transition: all 5s ease-in-out 2s;
 }

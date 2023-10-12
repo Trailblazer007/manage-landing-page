@@ -1,118 +1,505 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
+  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(true);
+
+  function handleToggle() {
+    setVisible(!visible);
+    setOpen(!open);
+  }
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
+    <>
+      <nav className="relative container mx-auto p-6">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <div className="pt-2">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
+              src="/images/logo.svg"
+              alt="logo image"
+              width={146}
               height={24}
-              priority
             />
-          </a>
+          </div>
+
+          {/* Menu Items */}
+          <div className="hidden space-x-6 md:flex">
+            <Link href="#" className="hover:text-darkGrayishBlue">
+              Pricing
+            </Link>
+            <Link href="#" className="hover:text-darkGrayishBlue">
+              Product
+            </Link>
+            <Link href="#" className="hover:text-darkGrayishBlue">
+              About Us
+            </Link>
+            <Link href="#" className="hover:text-darkGrayishBlue">
+              Careers
+            </Link>
+            <Link href="#" className="hover:text-darkGrayishBlue">
+              Community
+            </Link>
+          </div>
+
+          {/* Button */}
+          <div className=" flex justify-center">
+            <Link
+              href="#"
+              className=" hidden p-3 px-6 text-white bg-brightRed rounded-full 
+                    items-baseline hover:bg-brightRedLight md:block"
+            >
+              Get Started
+            </Link>
+
+            {/* Hamburger Icon */}
+            <button
+              id="menu-btn"
+              className="block hamburger md:hidden focus:outline-none"
+            >
+              {!open && (
+                <Image
+                  src="/images/icon-close.svg"
+                  width={21}
+                  height={22}
+                  alt="menu-close icon"
+                  onClick={handleToggle}
+                />
+              )}
+
+              {open && (
+                <Image
+                  src="/images/icon-hamburger.svg"
+                  width={25}
+                  height={18}
+                  alt="menu-open icon"
+                  onClick={handleToggle}
+                />
+              )}
+            </button>
+
+            {/* Mobile Menu */}
+
+            {visible && (
+              <div className="md:hidden">
+                <div
+                  id="menu"
+                  className="  absolute flex flex-col items-center self-end 
+                            py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto 
+                            sm:self-center left-6 right-6 drop-shadow-md"
+                >
+                  <Link href="#">Pricing</Link>
+                  <Link href="#">Product</Link>
+                  <Link href="#">About Us</Link>
+                  <Link href="#">Careers</Link>
+                  <Link href="#">Community</Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="hero">
+        <div
+          className="container flex flex-col-reverse items-center 
+                        px-6 mx-auto mt-10 space-y-0 md:flex-row md:space-y-0"
+        >
+          {/* Left Item */}
+          <div className="flex flex-col mb-32 space-y-12 md:w-1/2">
+            <h1
+              className="max-w-md text-4xl font-bold text-center md:text-5xl 
+                          md:text-left"
+            >
+              Bring everyone together to build better products
+            </h1>
+            <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
+              Manage makes it simple for software teams to plan day-to-day tasks
+              while keeping the larger team goals in view.
+            </p>
+
+            <div className="flex justify-center md:justify-start">
+              <Link
+                href="#"
+                className="p-3 px-6 text-white bg-brightRed rounded-full 
+                    baseline hover:bg-brightRedLight"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
+
+          {/* Image*/}
+          <div className="md:w-1/2 ">
+            <Image
+              src="/images/illustration-intro.svg"
+              alt="illustration image"
+              width={580}
+              height={525}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features">
+        {/* Flex container */}
+        <div
+          className="container flex flex-col px-4 mx-auto mt-10 space-y-12 
+                      md:space-y-0 md:flex-row"
+        >
+          {/* What's Different */}
+          <div className="flex flex-col space-y-12 md:w-1/2">
+            <h2 className="max-w-md text-4xl font-bold text-center md:text-left">
+              What’s different about Manage?
+            </h2>
+
+            <p className="max-w-sm text-center text-darkGrayishBlue md:text-left">
+              Manage provides all the functionality your team needs, without the
+              complexity. Our software is tailor-made for modern digital product
+              teams.
+            </p>
+          </div>
+
+          {/* Numbered List */}
+          <div className="flex flex-col space-y-8 md:w-1/2">
+            {/* List Item 1 */}
+            <div className="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+              {/* Heading */}
+              <div className="rounded-l-full bg-brightRedSupLight md:bg-transparent">
+                <div className="flex items-center space-x-2 ">
+                  <div className="px-4 py-2 text-white rounded-full md:py-1 bg-brightRed">
+                    01
+                  </div>
+
+                  <h3 className="text-base font-bold md:mb-4 md:hidden">
+                    Track company-wide progress
+                  </h3>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="hidden mb-4 text-lg font-bold md:block">
+                  Track company-wide progress
+                </h3>
+                <p className="text-darkGrayishBlue ">
+                  See how your day-to-day tasks fit into the wider vision. Go
+                  from tracking progress at the milestone level all the way done
+                  to the smallest of details. Never lose sight of the bigger
+                  picture again.
+                </p>
+              </div>
+            </div>
+            {/* List Item 2 */}
+            <div className="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+              {/* Heading */}
+              <div className="rounded-l-full bg-brightRedSupLight md:bg-transparent">
+                <div className="flex items-center space-x-2 ">
+                  <div className="px-4 py-2 text-white rounded-full md:py-1 bg-brightRed">
+                    02
+                  </div>
+
+                  <h3 className="text-base font-bold md:mb-4 md:hidden">
+                    Advanced built-in reports
+                  </h3>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="hidden mb-4 text-lg font-bold md:block">
+                  Advanced built-in reports
+                </h3>
+                <p className="text-darkGrayishBlue ">
+                  et internal delivery estimates and track progress toward
+                  company goals. Our customisable dashboard helps you build out
+                  the reports you need to keep key stakeholders informed.
+                </p>
+              </div>
+            </div>
+
+            {/* List Item 3 */}
+            <div className="flex flex-col space-y-3 md:space-y-0 md:space-x-6 md:flex-row">
+              {/* Heading */}
+              <div className="rounded-l-full bg-brightRedSupLight md:bg-transparent">
+                <div className="flex items-center space-x-2 ">
+                  <div className="px-4 py-2 text-white rounded-full md:py-1 bg-brightRed">
+                    03
+                  </div>
+
+                  <h3 className="text-base font-bold md:mb-4 md:hidden">
+                    Everything you need in one place
+                  </h3>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="hidden mb-4 text-lg font-bold md:block">
+                  Everything you need in one place
+                </h3>
+                <p className="text-darkGrayishBlue ">
+                  Stop jumping from one service to another to communicate, store
+                  files, track tasks and share documents. Manage offers an
+                  all-in-one team productivity solution.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section id="testimonials">
+        {/* Container to heading and testm blocks */}
+        <div className="max-w-6xl px-5 mx-auto mt-32 text-center">
+          <h2 className="text-4l font-bold text-center ">
+            What's Different About Manage?
+          </h2>
+          {/* Testimonials Container */}
+          <div className="flex flex-col my-24 md:flex-row md:space-x-6">
+            {/* Testimonial 1 */}
+            <div
+              className="flex flex-col items-center p-6 space-y-6 rounded-lg
+                          bg-veryLightGray md:w-1/3 "
+            >
+              <Image
+                src="/images/avatar-anisha.png"
+                className="w-16 -mt-14"
+                width={144}
+                height={144}
+                alt="image of Anisha Li"
+              />
+              <h5 className="text-lg font-bold">Anisha Li</h5>
+              <div className="text-sm text-darkGrayishBlue">
+                “Manage has supercharged our team’s workflow. The ability to
+                maintain visibility on larger milestones at all times keeps
+                everyone motivated.”
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div
+              className="hidden flex-col items-center p-6 space-y-6 rounded-lg
+                          bg-veryLightGray md:flex md:w-1/3 "
+            >
+              <Image
+                src="/images/avatar-ali.png"
+                className="w-16 -mt-14"
+                width={144}
+                height={144}
+                alt=""
+              />
+              <h5 className="text-lg font-bold">Anisha Bravo</h5>
+              <div className="text-sm text-darkGrayishBlue">
+                We have been able to cancel so many other subscriptions since
+                using Manage. There is no more cross-channel confusion and
+                everyone is much more focused.”
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div
+              className="hidden flex-col items-center p-6 space-y-6 rounded-lg
+                          bg-veryLightGray md:flex md:w-1/3 "
+            >
+              <Image
+                src="/images/avatar-richard.png"
+                className="w-16 -mt-14"
+                width={144}
+                height={144}
+                alt=""
+              />
+              <h5 className="text-lg font-bold">Richard Watts</h5>
+              <div className="text-sm text-darkGrayishBlue">
+                “Manage allows us to provide structure and process. It keeps us
+                organized and focused. I can’t stop recommending them to
+                everyone I talk to!”
+              </div>
+            </div>
+          </div>
+
+          <div className="my-16">
+            <Link
+              href="#"
+              className="p-3 px-6 text-white bg-brightRed rounded-full 
+                    baseline hover:bg-brightRedLight"
+            >
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Call To Action */}
+      <section id="cta" className="bg-brightRed">
+        {/* Flex Container */}
+        <div
+          className="container flex flex-col items-center justify-between px-6 py-24
+                       mx-auto space-y-12 md:flex-row md:space-y-0"
+        >
+          {/* Heading */}
+          <h2
+            className="text-5xl font-bold leading-tight text-center text-white 
+                         md:text-4xl md:max-w-xl md:text-left"
+          >
+            Simplify how your team works today
+          </h2>
+
+          {/* Button */}
+          <Link
+            href="#"
+            className="p-3 px-6 bg-white text-brightRed rounded-full 
+                    baseline shadow-2xl hover:bg-gray-300"
+          >
+            Get Started
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-veryDarkBlue ">
+        {/* Flex Container */}
+        <div
+          className="flex max-w-4xl flex-col-reverse justify-between px-6 py-10 
+                        mx-auto space-y-8 md:flex-row md:space-y-0"
+        >
+          {/* Logo and social links container  */}
+          <div className="mx-auto my-6 text-center text-white md:hidden">
+            Copyright &copy; All Rights Reserved
+          </div>
+          <div
+            className="flex flex-col-reverse items-center justify-between 
+                        space-y-12 md:flex-col md:space-y-0 md:items-start "
+          >
+            {/* Logo */}
+            <div className="mt-4">
+              <Image
+                src="/images/logo.svg"
+                alt="logo image"
+                width={146}
+                height={24}
+              ></Image>
+            </div>
+
+            {/* Social Links Container*/}
+            <div className="flex justify-center space-x-4">
+              {/* Link 1 */}
+              <Link href="#">
+                <Image
+                  src="./images/icon-facebook.svg"
+                  alt="facebook logo"
+                  width={20}
+                  height={20}
+                ></Image>
+              </Link>
+
+              {/* Link 2 */}
+              <Link href="#">
+                <Image
+                  src="./images/icon-youtube.svg"
+                  alt="youtube logo"
+                  width={20}
+                  height={20}
+                ></Image>
+              </Link>
+
+              {/* Link 3 */}
+              <Link href="#">
+                <Image
+                  src="./images/icon-twitter.svg"
+                  alt="twitter logo"
+                  width={20}
+                  height={20}
+                ></Image>
+              </Link>
+
+              {/* Link 4 */}
+              <Link href="#">
+                <Image
+                  src="./images/icon-pinterest.svg"
+                  alt="pinterest logo"
+                  width={20}
+                  height={20}
+                ></Image>
+              </Link>
+
+              {/* Link 5 */}
+              <Link href="#">
+                <Image
+                  src="./images/icon-instagram.svg"
+                  alt="instagram logo"
+                  width={20}
+                  height={20}
+                ></Image>
+              </Link>
+            </div>
+          </div>
+
+          {/* List Container */}
+          <div className="flex justify-around space-x-16 ">
+            <div className="flex flex-col space-y-3 text-white">
+              <Link href="#" className="hover:text-brightRed">
+                Home
+              </Link>
+              <Link href="#" className="hover:text-brightRed">
+                Pricing
+              </Link>
+              <Link href="#" className="hover:text-brightRed">
+                Products
+              </Link>
+              <Link href="#" className="hover:text-brightRed">
+                About
+              </Link>
+            </div>
+
+            <div className="flex flex-col space-y-3 text-white">
+              <Link href="#" className="hover:text-brightRed">
+                Careers
+              </Link>
+              <Link href="#" className="hover:text-brightRed">
+                Community
+              </Link>
+              <Link href="#" className="hover:text-brightRed">
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
+
+          {/* Input Container */}
+          <div className="flex flex-col justify-between">
+            <form>
+              <div className="flex space-x-3">
+                <input
+                  type="text"
+                  className=" flex-1 px-4 rounded-full foucus:outline-none"
+                  placeholder="Updated in your inbox"
+                ></input>
+                <button
+                  className="px-6 py-2 text-white rounded-full bg-brightRedLight
+                                  focus:outline-none"
+                >
+                  Go
+                </button>
+              </div>
+            </form>
+            <div className="hidden text-white md:block">
+              Copyright &copy; 2022, All Rights Reserved
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <div className="attribution bg-veryDarkBlue text-center text-darkGrayishBlue">
+        <p>Challenge by: </p>
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+          Frontend Mentor
+        </a>
+        <div className="pb-4">
+          Coded by <a href="#">Fatoye Oluwaseun</a>.
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </>
+  );
 }
