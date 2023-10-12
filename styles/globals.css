@@ -28,11 +28,3 @@ body {
 }
 
 /* Hamburger menu */
-
-#menu-btn {
-    transition: all 3s ease-in;
-}
-
-.hamburger {
-    transition: all 5s ease-in-out 2s;
-}
